@@ -6,13 +6,23 @@ import com.koreait.short_url_project.global.exceptions.GlobalException;
 import com.koreait.short_url_project.global.rsData.RsData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class MemberService {
+
     private final MemberRepository memberRepository;
+
+    private Optional<Member> findByUsername(String username) {
+        return memberRepository.findByUsername(username);
+    }
+
+    @Transactional
+    //@Transactional(noRollbackFor = GlobalException.class)
     public RsData<Member> join(String username, String password, String nickname) {
 
         findByUsername(username).ifPresent(ignored -> {
@@ -27,7 +37,9 @@ public class MemberService {
         memberRepository.save(member);
         return RsData.of("회원가입이 완료되었습니다.", member);
     }
-    private Optional<Member> findByUsername(String username) {
-        return memberRepository.findByUsername(username);
+
+    public Member getReferenceById(long id) {
+        return memberRepository.getReferenceById(id);
     }
+
 }

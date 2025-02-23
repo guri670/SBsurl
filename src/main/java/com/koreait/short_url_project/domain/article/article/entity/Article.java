@@ -1,26 +1,25 @@
 package com.koreait.short_url_project.domain.article.article.entity;
 
+import com.koreait.short_url_project.domain.member.member.entity.Member;
+import com.koreait.short_url_project.global.jpa.entity.BaseTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
 
-import static jakarta.persistence.GenerationType.IDENTITY;
+import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Builder
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class Article {
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    private long id;
+@NoArgsConstructor(access = PROTECTED)
+@AllArgsConstructor(access = PROTECTED)
+public class Article extends BaseTime {
     private String title;
     @Column(columnDefinition = "TEXT")
     private String body;
-    private String body2;
-    private String body3;
+
+    @ManyToOne
+    private Member author;
 }
