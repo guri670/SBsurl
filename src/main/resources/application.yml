@@ -21,10 +21,10 @@ spring:
 custom:
   site:
     name: "My Site"
-  logging:
-    level:
-    com.koreait.short_url_project: DEBUG
-    org.hibernate.SQL: DEBUG
-    org.hibernate.orm.jdbc.bind: TRACE
-    org.hibernate.orm.jdbc.extract: TRACE
-    org.springframework.transaction.interceptor: TRACE
+    logging:
+      level:
+        com.koreait.short_url_project: DEBUG
+        org.hibernate.SQL: DEBUG
+        org.hibernate.orm.jdbc.bind: TRACE
+        org.hibernate.orm.jdbc.extract: TRACE
+        org.springframework.transaction.interceptor: TRACE
